@@ -1,0 +1,32 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}New Dossier{% endblock %}
+
+{% block content %}
+    <h1>Créer Dossier</h1>  
+    <div class="row mt-4 mb-5">
+        <div class="col card">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img img-thumbnail" src="{{ asset('icons/thermometer.png') }}" />
+                </div>
+                <div class="col-md-8">
+                    20 ° C
+                </div>
+            </div>
+        </div>
+        <div class="col card">
+             <div class="row">
+                <div class="col-md-4">
+                     <img class="img img-thumbnail" src="{{ asset('icons/heart.png') }}" />
+                </div>
+                <div class="col-md-8">
+                    60 cpm
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ include('dossier/_form.html.twig') }}
+
+    <a href="{{ path('dossier_index') }}">back to list</a>
+{% endblock %}

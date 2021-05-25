@@ -1,0 +1,49 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}Medecins{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+                   Gestion Medecins
+        </div>
+        <div class="card-body">    
+                    <h1 class="bg-dark text-center text-white">Liste des medecins</h1>
+                    <a class="btn btn-dark btn-sm" href="{{ path('medecin_new') }}">Ajouter Medecin</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Tél</th>
+                                <th>Specialite</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.tel }}</td>
+                                <td>{{ user.specialite }}</td>
+                                <td>
+                                    <a href="{{ path('medecin_show', {'id': user.id}) }}">show</a>
+                                    <a href="{{ path('medecin_edit', {'id': user.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+    
+
+   
+{% endblock %}

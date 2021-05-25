@@ -1,0 +1,47 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block content %}
+   <div class="card">
+        <div class="card-header">
+                   Gestion Sécretaires
+        </div>
+        <div class="card-body">    
+                    <h1 class="bg-dark text-white text-center">Liste des sécretaires</h1>
+                    <a class="btn btn-dark btn-sm" href="{{ path('secretaire_new') }}">Ajouter sécretaire</a>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Tel</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.tel }}</td>
+                                <td>
+                                    <a href="{{ path('secretaire_show', {'id': user.id}) }}">show</a>
+                                    <a href="{{ path('secretaire_edit', {'id': user.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="10">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+    
+
+    
+{% endblock %}

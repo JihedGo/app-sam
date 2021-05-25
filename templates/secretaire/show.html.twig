@@ -1,0 +1,34 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block content %}
+    <h1>sécretaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ user.tel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('secretaire_index') }}">back to list</a>
+
+    <a href="{{ path('secretaire_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('secretaire/_delete_form.html.twig') }}
+{% endblock %}

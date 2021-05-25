@@ -1,0 +1,46 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}Dossier index{% endblock %}
+
+{% block content %}
+<div class="card">
+        <div class="card-header">
+                   Gestion dossiers
+        </div>
+        <div class="card-body">    
+                     <h1 class="text-center bg-dark text-white">Dossier index</h1>
+    <a class="btn btn-sm btn-dark" href="{{ path('dossier_new') }}">Ajouter Dossier</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Description</th>
+                    <th>Ordonnance</th>
+                    <!--<th>actions</th>-->
+                </tr>
+            </thead>
+            <tbody>
+            {% for dossier in dossiers %}
+                <tr>
+                    <td>{{ dossier.patient.firstName }} {{ dossier.patient.lastName }}</td>
+                    <td>{{ dossier.description }}</td>
+                    <td>{{ dossier.ordonnance }}</td>
+                    
+                    <!--<td>
+                        <a href="{{ path('dossier_show', {'id': dossier.id}) }}">show</a>
+                        <a href="{{ path('dossier_edit', {'id': dossier.id}) }}">edit</a>
+                    </td>-->
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        </div>
+    </div>
+   
+  
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">eHealth</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ path('dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
+      </li>
+    
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ app.user.firstName  }} {{ app.user.lastName  }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+      </li>
+      
+    </ul>
+   
+  </div>
+</nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Menu
+                </div>
+                <div class="card-body">
+                
+                    {% if (app.user.role == "ROLE_ADMIN") %}    
+                        <ul>
+                        {# administrateur #}
+                            <li class="list-group-item"><a href="{{ path('medecin_index') }}">Medecins</a></li>
+                            <li class="list-group-item"><a href="{{ path('secretaire_index') }}">Sécretaires</a></li>
+                            <li class="list-group-item"><a href="{{ path('patient_index') }}">Patients</a></li>
+                            <li class="list-group-item"><a href="{{ path('dossier_index') }}">Dossiers</a></li>
+                            <li class="list-group-item"><a href="{{ path('rendez_vous_index') }}">Rendez-Vous</a></li>
+                            <li class="list-group-item"><a href="">Mes Consultations</a></li>
+                        </ul>
+                    {% elseif (app.user.role == "ROLE_SECRETAIRE") %}
+                         <ul>
+                            <li class="list-group-item"><a href="{{ path('patient_index') }}">Patients</a></li>
+                            <li class="list-group-item"><a href="{{ path('rendez_vous_index') }}">Rendez-Vous</a></li>
+                        </ul>
+                    {% elseif (app.user.role == "ROLE_MEDECIN") %}
+                         <ul>
+                            <li class="list-group-item"><a href="{{ path('doctor_consultation') }}">Mes Consultations</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+         <div class="col-md-8">
+            {% block content %}
+            <div class="card">
+                <div class="card-header">
+                    Informations generales
+                </div>
+                <div class="card-body">    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header text-white bg-primary">
+                                    Médecins
+                                </div>
+                                <div class="card-body">
+                                    {{ medecins }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="card">
+                                <div class="card-header text-white bg-info">
+                                    Sécretaires
+                                </div>
+                                <div class="card-body">
+                                    {{ secretaires }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="card">
+                                <div class="card-header text-white bg-success">
+                                    Patients
+                                </div>
+                                <div class="card-body">
+                                    {{ patients }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}

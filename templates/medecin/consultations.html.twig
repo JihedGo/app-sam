@@ -1,0 +1,32 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}RendezVous index{% endblock %}
+
+{% block content %}
+    <h1 class="bg-dark bg-text text-white text-center">Mes Rendez-Vous</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date RDV</th>
+                <th>Patient</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rendez_vou in rendez_vouses %}
+            <tr>
+                <td>{{ rendez_vou.dateAt ? rendez_vou.dateAt|date('Y-m-d') : '' }}</td>
+                <td>{{ rendez_vou.patient.firstName }} {{ rendez_vou.patient.lastName }}</td>
+                <td>
+                    <a href="{{ path('consulter_dossier',{'id':rendez_vou.patient.id}) }}">consulter</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
