@@ -24,11 +24,11 @@ class RendezVousType extends AbstractType
     },
             ])
             ->add('patient', EntityType::class,[
-                'class' => Patient::class,
-                'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('p')
-                ->orderBy('p.id','DESC');
-                },
+                'class' => User::class,
+    'query_builder' => function (EntityRepository $er) {
+        return $er->createQueryBuilder('u')
+            ->where('u.role = :r')->setParameter('r','ROLE_PATIENT');
+    },
             ])
         ;
     }

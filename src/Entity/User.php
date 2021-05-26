@@ -91,11 +91,22 @@ class User implements UserInterface
      */
     private $gender;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="users")
+     */
+    private $medecin;
+
+    /**
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="medecin")
+     */
+    private $users;
+
 
     public function __construct()
     {
         $this->rendezVouses = new ArrayCollection();
         $this->dossiers = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -348,6 +359,48 @@ class User implements UserInterface
     public function setGender(string $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getMedecin(): ?self
+    {
+        return $this->medecin;
+    }
+
+    public function setMedecin(?self $medecin): self
+    {
+        $this->medecin = $medecin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(self $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setMedecin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(self $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getMedecin() === $this) {
+                $user->setMedecin(null);
+            }
+        }
 
         return $this;
     }

@@ -3,34 +3,43 @@
 {% block title %}Patient index{% endblock %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-header">
-                   Gestion patients
-        </div>
-        <div class="card-body">    
-                <h1 class="bg-light text-center bg-dark text-white">Liste des patients</h1>
-                <a class="btn btn-dark btn-sm" href="{{ path('patient_new') }}">Ajouter Patient</a>
-            <table class="table">
+
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Patients</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h6 class="card-title text-bold">Liste des Patients</h6>
+                                {% if app.user.role == "ROLE_SECRETAIRE" %}
+                                <p class="content-group">
+                                  <a class="btn btn-primary" href="{{ path('patient_new') }}">Ajouter un patient</a>
+                                </p>
+                                {% endif %}
+								<div class="table-responsive">
+									  <table class="table">
                 <thead>
                     <tr>
                         <th>Prénom</th>
                         <th>Nom</th>
                         <th>Date Naissance</th>
-                        <th>Cin</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for patient in patients %}
                     <tr>
-                        <td>{{ patient.id }}</td>
                         <td>{{ patient.firstName }}</td>
                         <td>{{ patient.lastName }}</td>
-                        <td>{{ patient.dateOfBirth ? patient.dateOfBirth|date('Y-m-d') : '' }}</td>
-                        <td>{{ patient.cin }}</td>
+                        <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
                         <td>
-                            <a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
-                            <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
+                            <a href="{{ path('patient_show', {'id': patient.id}) }}">details</a>
+                            <a href="{{ path('patient_edit', {'id': patient.id}) }}">modifier</a>
                         </td>
                     </tr>
                 {% else %}
@@ -40,9 +49,13 @@
                 {% endfor %}
                 </tbody>
             </table>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    
-        </div>
     </div>
-   
+
 {% endblock %}

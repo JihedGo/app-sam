@@ -23,7 +23,7 @@ class MedecinController extends AbstractController
 
     private $encoder;
     public function __construct(UserPasswordEncoderInterface $encoder)
-    {   
+    {
         $this->encoder = $encoder;
     }
      /**
@@ -46,8 +46,8 @@ class MedecinController extends AbstractController
     /**
      * @Route("/consulter/{id}",name="consulter_dossier")
      */
-    public function consulter(Patient $patient,Request $request){
-        
+    public function consulter(User $patient,Request $request){
+
         $dossier = new Dossier();
         $dossier->setPatient($patient);
         $form = $this->createForm(DossierType::class, $dossier);
@@ -76,7 +76,7 @@ class MedecinController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $this->encoder->encodePassword($user, "secret#123");
+            $hash = $this->encoder->encodePassword($user, "00000000");
             $user->setRole('ROLE_MEDECIN');
             $user->setPassword($hash);
             $entityManager = $this->getDoctrine()->getManager();
@@ -136,5 +136,5 @@ class MedecinController extends AbstractController
         return $this->redirectToRoute('medecin_index');
     }
 
-    
+
 }

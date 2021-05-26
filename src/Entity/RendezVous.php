@@ -24,7 +24,7 @@ class RendezVous
     private $medicin;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="rendezVouses")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rendezVouses")
      */
     private $patient;
 
@@ -37,6 +37,16 @@ class RendezVous
      * @ORM\Column(type="boolean")
      */
     private $isTerminated;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAccepted;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $priority;
 
     public function getId(): ?int
     {
@@ -87,6 +97,30 @@ class RendezVous
     public function setIsTerminated(bool $isTerminated): self
     {
         $this->isTerminated = $isTerminated;
+
+        return $this;
+    }
+
+    public function getIsAccepted(): ?bool
+    {
+        return $this->isAccepted;
+    }
+
+    public function setIsAccepted(bool $isAccepted): self
+    {
+        $this->isAccepted = $isAccepted;
+
+        return $this;
+    }
+
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
 
         return $this;
     }

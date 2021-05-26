@@ -3,11 +3,37 @@
 {% block title %}Edit User{% endblock %}
 
 {% block content %}
-    <h1>Edit User</h1>
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Médecins</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
 
-    {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
+								  <h1>Medecin</h1>
+                                {{ include('medecin/_form.html.twig', {'button_label': 'Mise à jour'}) }}
 
-    <a href="{{ path('user_index') }}">back to list</a>
+                                <div class="row">
 
-    {{ include('user/_delete_form.html.twig') }}
+
+
+                                    <div class="col-md-6">
+                                          <a href="{{ path('user_index') }}">liste des médecins</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                          {{ include('medecin/_delete_form.html.twig') }}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
 {% endblock %}

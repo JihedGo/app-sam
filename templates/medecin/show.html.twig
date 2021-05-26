@@ -3,7 +3,19 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-    <h1>Medecin</h1>
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Médecins</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+
+								  <h1>Medecin</h1>
 
     <table class="table">
         <tbody>
@@ -12,11 +24,11 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>FirstName</th>
+                <th>Prénom</th>
                 <td>{{ user.firstName }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
+                <th>Nom</th>
                 <td>{{ user.lastName }}</td>
             </tr>
             <tr>
@@ -30,9 +42,28 @@
         </tbody>
     </table>
 
-    <a href="{{ path('medecin_index') }}">back to list</a>
+    <div class="row">
 
-    <a href="{{ path('medecin_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('medecin/_delete_form.html.twig') }}
+
+
+
+        <div class="col-md-4">
+            <a href="{{ path('medecin_index') }}">liste medecins</a>
+        </div>
+        <div class="col-md-4">
+             <a class="btn btn-warning" href="{{ path('medecin_edit', {'id': user.id}) }}">modifier</a>
+        </div>
+        <div class="col-md-4">
+            {{ include('medecin/_delete_form.html.twig') }}
+        </div>
+    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
 {% endblock %}

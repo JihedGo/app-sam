@@ -1,108 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}tableau de boards{% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">eHealth</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="{{ path('dashboard') }}">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
+<div class="main-wrapper">
+        {% include 'dashboard/navbar.html.twig' %}
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {{ app.user.firstName  }} {{ app.user.lastName  }}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
-        </div>
-      </li>
-
-    </ul>
-
-  </div>
-</nav>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Menu
-                </div>
-                <div class="card-body">
-
-                    {% if (app.user.role == "ROLE_ADMIN") %}
-                        <ul>
-                        {# administrateur #}
-                            <li class="list-group-item"><a href="{{ path('medecin_index') }}">Medecins</a></li>
-                            <li class="list-group-item"><a href="{{ path('secretaire_index') }}">Sécretaires</a></li>
-                            <li class="list-group-item"><a href="{{ path('patient_index') }}">Patients</a></li>
-                            <li class="list-group-item"><a href="{{ path('dossier_index') }}">Dossiers</a></li>
-                            <li class="list-group-item"><a href="{{ path('rendez_vous_index') }}">Rendez-Vous</a></li>
-                            <li class="list-group-item"><a href="">Mes Consultations</a></li>
-                        </ul>
-                    {% elseif (app.user.role == "ROLE_SECRETAIRE") %}
-                         <ul>
-                            <li class="list-group-item"><a href="{{ path('patient_index') }}">Patients</a></li>
-                            <li class="list-group-item"><a href="{{ path('rendez_vous_index') }}">Rendez-Vous</a></li>
-                        </ul>
-                    {% elseif (app.user.role == "ROLE_MEDECIN") %}
-                         <ul>
-                            <li class="list-group-item"><a href="{{ path('doctor_consultation') }}">Mes Consultations</a></li>
-                        </ul>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-         <div class="col-md-8">
-            {% block content %}
-            <div class="card">
-                <div class="card-header">
-                    Informations generales
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header text-white bg-primary">
-                                    Médecins
-                                </div>
-                                <div class="card-body">
-                                    {{ medecins }}
-                                </div>
-                            </div>
+        {% include 'dashboard/sidebar.html.twig' %}
+        {% block content %}
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <div class="dash-widget">
+							<span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+							<div class="dash-widget-info text-right">
+								<h3>{{ medecins }}</h3>
+								<span class="widget-title1">Médecins <i class="fa fa-check" aria-hidden="true"></i></span>
+							</div>
                         </div>
-                        <div class="col-md-4">
-                             <div class="card">
-                                <div class="card-header text-white bg-info">
-                                    Sécretaires
-                                </div>
-                                <div class="card-body">
-                                    {{ secretaires }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                             <div class="card">
-                                <div class="card-header text-white bg-success">
-                                    Patients
-                                </div>
-                                <div class="card-body">
-                                    {{ patients }}
-                                </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <div class="dash-widget">
+                            <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+                            <div class="dash-widget-info text-right">
+                                <h3>{{ patients }}</h3>
+                                <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-4">
+                        <div class="dash-widget">
+                            <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+                            <div class="dash-widget-info text-right">
+                                <h3>{{ secretaires }}</h3>
+                                <span class="widget-title3">Sécretaires <i class="fa fa-check" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
-            {% endblock %}
+
         </div>
+        {% endblock %}
     </div>
-</div>
 {% endblock %}

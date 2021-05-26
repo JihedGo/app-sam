@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\User;
 use App\Form\PatientType;
 use App\Repository\PatientRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +20,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/", name="patient_index", methods={"GET"})
      */
-    public function index(PatientRepository $patientRepository): Response
+    public function index(UserRepository $patientRepository): Response
     {
         return $this->render('patient/index.html.twig', [
             'patients' => $patientRepository->findAll(),
@@ -30,7 +32,7 @@ class PatientController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $patient = new Patient();
+        $patient = new User();
         $form = $this->createForm(PatientType::class, $patient);
         $form->handleRequest($request);
 
@@ -51,7 +53,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/{id}", name="patient_show", methods={"GET"})
      */
-    public function show(Patient $patient): Response
+    public function show(User $patient): Response
     {
         return $this->render('patient/show.html.twig', [
             'patient' => $patient,
@@ -61,7 +63,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/{id}/edit", name="patient_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Patient $patient): Response
+    public function edit(Request $request, User $patient): Response
     {
         $form = $this->createForm(PatientType::class, $patient);
         $form->handleRequest($request);
@@ -81,7 +83,7 @@ class PatientController extends AbstractController
     /**
      * @Route("/{id}", name="patient_delete", methods={"POST"})
      */
-    public function delete(Request $request, Patient $patient): Response
+    public function delete(Request $request, User $patient): Response
     {
         if ($this->isCsrfTokenValid('delete'.$patient->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

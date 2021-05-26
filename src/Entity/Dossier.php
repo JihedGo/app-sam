@@ -18,7 +18,7 @@ class Dossier
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="dossiers")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="dossiers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $patient;
@@ -38,12 +38,12 @@ class Dossier
         return $this->id;
     }
 
-    public function getPatient(): ?Patient
+    public function getPatient(): ?User
     {
         return $this->patient;
     }
 
-    public function setPatient(?Patient $patient): self
+    public function setPatient(?User $patient): self
     {
         $this->patient = $patient;
 

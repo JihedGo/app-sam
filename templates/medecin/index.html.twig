@@ -3,47 +3,54 @@
 {% block title %}Medecins{% endblock %}
 
 {% block content %}
-    <div class="card">
-        <div class="card-header">
-                   Gestion Medecins
-        </div>
-        <div class="card-body">    
-                    <h1 class="bg-dark text-center text-white">Liste des medecins</h1>
-                    <a class="btn btn-dark btn-sm" href="{{ path('medecin_new') }}">Ajouter Medecin</a>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Prénom</th>
-                                <th>Nom</th>
-                                <th>Tél</th>
-                                <th>Specialite</th>
-                                <th>actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for user in users %}
-                            <tr>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.firstName }}</td>
-                                <td>{{ user.lastName }}</td>
-                                <td>{{ user.tel }}</td>
-                                <td>{{ user.specialite }}</td>
-                                <td>
-                                    <a href="{{ path('medecin_show', {'id': user.id}) }}">show</a>
-                                    <a href="{{ path('medecin_edit', {'id': user.id}) }}">edit</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="10">no records found</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-        </div>
-    </div>
-    
+    <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Médecins</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h6 class="card-title text-bold">Liste des Médecins</h6>
+                                <p class="content-group">
+                                  <a class="btn btn-primary" href="{{ path('medecin_new') }}">Ajouter un médecin</a>
+                                </p>
+								<div class="table-responsive">
+									<table class="datatable table table-stripped ">
+                                    <thead>
+                                        <tr>
+                                            <th>Prénom</th>
+                                            <th>Nom</th>
+                                            <th>Specialite</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for medecin in users %}
+                                        <tr>
+                                            <td>{{ medecin.firstName }}</td>
+                                            <td>{{ medecin.lastName }}</td>
+                                            <td>{{ medecin.specialite }}</td>
+                                            <td>
 
-   
+                                                <a class="btn btn-warning" href="{{ path('medecin_edit',{'id':medecin.id}) }}">modifier</a>
+                                                <a class="btn btn-danger" href="{{ path('medecin_delete',{'id':medecin.id}) }}">supprimer</a>
+                                            </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
 {% endblock %}

@@ -17,7 +17,7 @@ class DashboardController extends AbstractController
 
     private $encoder;
     public function __construct(UserPasswordEncoderInterface $encoder)
-    {   
+    {
         $this->encoder = $encoder;
     }
     /**
@@ -26,10 +26,10 @@ class DashboardController extends AbstractController
     public function index(): Response
     {
         return $this->render('dashboard/index.html.twig', [
-            'patients' => count($this->getDoctrine()->getRepository(Patient::class)->findAll()),
+            'patients' => count($this->getDoctrine()->getRepository(User::class)->findAllPatients()),
             'medecins' => count($this->getDoctrine()->getRepository(User::class)->findAllMedecins()),
             'secretaires' => count($this->getDoctrine()->getRepository(User::class)->findAllSecretaires()),
         ]);
     }
-    
+
 }
