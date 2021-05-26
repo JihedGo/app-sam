@@ -13,11 +13,11 @@ class AppFixtures extends Fixture
     private $encoder;
     public function __construct(UserPasswordEncoderInterface $encoder)
     {
-        $this->encoder = $encoder; 
+        $this->encoder = $encoder;
     }
     public function load(ObjectManager $manager)
     {
-        $faker = \Faker\Factory::create('fr_Fr');    
+        $faker = \Faker\Factory::create('fr_Fr');
         // $product = new Product();
         // $manager->persist($product);
         $admin = new User();
@@ -25,7 +25,11 @@ class AppFixtures extends Fixture
         $admin->setLastName($faker->lastName);
         $admin->setTel($faker->phoneNumber);
         $admin->setRole('ROLE_ADMIN');
-        $admin->setEmail('admin@health.tn');
+        $admin->setEmail('sameh@app.tn');
+        $admin->setAddress($faker->address);
+        $admin->setVille($faker->city);
+        $admin->setDateNaissance($faker->dateTimeBetween('-30 years'));
+        $admin->setGender("male");
         $admin->setPassword($this->encoder->encodePassword($admin, "secret#123"));
         $manager->persist($admin);
         $manager->flush();

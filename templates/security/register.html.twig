@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+
+ <div class="main-wrapper  account-wrapper">
+        <div class="account-page">
+            <div class="account-center">
+                <div class="account-box">
+
+
+
+                          {{ form_start(form) }}
+                          	<div class="account-logo">
+                            <a href="{{ path('app_login') }}"><img src="assets/img/logo-dark.png" alt=""></a>
+                        </div>
+                    {{ form_widget(form) }}
+                    <div class="form-group text-center">
+                            <button class="btn btn-primary account-btn" type="submit">Inscrire</button>
+                        </div>
+                    {{ form_end(form) }}
+
+                        <div class="text-center login-link">
+                            Vous avez déjà un compte? <a href="{{ path('app_login') }}">Connexion</a>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
