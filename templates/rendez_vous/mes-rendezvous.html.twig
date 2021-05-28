@@ -1,0 +1,57 @@
+{% extends 'dashboard/index.html.twig' %}
+
+{% block title %}RendezVous index{% endblock %}
+
+{% block content %}
+
+
+      <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Mes RendezVous</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for message in app.flashes('info') %}
+            <div class="alert alert-info">
+                {{ message }}
+            </div>
+        {% endfor %}
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+
+
+								<div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Date RDV</th>
+                                                <th>Medecin</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for rendez_vou in rendez_vouses %}
+                                            <tr>
+                                                <td>{{ rendez_vou.dateAt ? rendez_vou.dateAt|date('Y-m-d H:i:s') : '' }}</td>
+                                                <td>{{ rendez_vou.medicin.firstName }} {{ rendez_vou.medicin.lastName }}</td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="4">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+{% endblock %}

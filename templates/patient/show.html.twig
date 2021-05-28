@@ -1,38 +1,60 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard/index.html.twig' %}
 
 {% block title %}Patient{% endblock %}
 
-{% block body %}
-    <h1>Patient</h1>
+{% block content %}
+ <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Patients</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h1>Patient</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ patient.id }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
+                <th>Prénom</th>
                 <td>{{ patient.firstName }}</td>
             </tr>
             <tr>
-                <th>LastName</th>
+                <th>Nom</th>
                 <td>{{ patient.lastName }}</td>
             </tr>
             <tr>
-                <th>DateOfBirth</th>
-                <td>{{ patient.dateOfBirth ? patient.dateOfBirth|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Cin</th>
-                <td>{{ patient.cin }}</td>
+                <th>Date Naissance</th>
+                <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('patient_index') }}">back to list</a>
+    <div class="row">
 
-    <a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
 
-    {{ include('patient/_delete_form.html.twig') }}
+
+
+
+        <div class="col-md-4">
+            <a href="{{ path('patient_index') }}">liste des patients</a>
+        </div>
+        <div class="col-md-4">
+            <a class="btn btn-warning" href="{{ path('patient_edit', {'id': patient.id}) }}">modifier</a>
+        </div>
+        <div class="col-md-4">
+            {{ include('patient/_delete_form.html.twig') }}
+        </div>
+    </div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
 {% endblock %}

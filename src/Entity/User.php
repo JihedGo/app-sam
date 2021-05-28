@@ -93,6 +93,7 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $medecin;
 

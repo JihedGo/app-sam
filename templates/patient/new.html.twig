@@ -3,17 +3,30 @@
 {% block title %}New Patient{% endblock %}
 
 {% block content %}
-  <div class="card">
-        <div class="card-header">
-                   Gestion patients
-        </div>
-        <div class="card-body">    
-               <h1>Ajouter Patient</h1>
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des patients</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+
+								      <h1>Ajouter Patient</h1>
 
                 {{ include('patient/_form.html.twig') }}
 
-                <a href="{{ path('patient_index') }}">back to list</a>
-        </div>
-    </div>
-    
+                <a href="{{ path('patient_index') }}">liste des patients</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+
 {% endblock %}

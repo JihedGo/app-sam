@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,6 +20,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, ['attr'=>['class'=>'form-control']])
+            ->add('password', PasswordType::class, ['attr'=>['class'=>'form-control']])
             ->add('firstName', TextType::class, ['label'=>'Prénom','attr'=>['class'=>'form-control']])
             ->add('lastName', TextType::class, ['label'=>'Nom','attr'=>['class'=>'form-control']])
             ->add('tel', TelType::class, ['attr'=>['class'=>'form-control']])

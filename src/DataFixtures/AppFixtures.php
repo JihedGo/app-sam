@@ -30,7 +30,8 @@ class AppFixtures extends Fixture
         $admin->setVille($faker->city);
         $admin->setDateNaissance($faker->dateTimeBetween('-30 years'));
         $admin->setGender("male");
-        $admin->setPassword($this->encoder->encodePassword($admin, "secret#123"));
+        $admin->setMedecin(null);
+        $admin->setPassword($this->encoder->encodePassword($admin, "00000000"));
         $manager->persist($admin);
         $manager->flush();
     }

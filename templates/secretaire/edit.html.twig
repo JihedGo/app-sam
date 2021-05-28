@@ -3,11 +3,30 @@
 {% block title %}Edit User{% endblock %}
 
 {% block content %}
-    <h1>Modifier</h1>
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Sécretaires</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+       <h1>Modifier</h1>
 
     {{ include('user/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('secretaire_index') }}">back to list</a>
 
     {{ include('user/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
 {% endblock %}

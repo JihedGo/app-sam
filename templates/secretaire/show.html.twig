@@ -3,7 +3,19 @@
 {% block title %}User{% endblock %}
 
 {% block content %}
-    <h1>sécretaire</h1>
+<div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des Sécretaires</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+
+								  <h1>sécretaire</h1>
 
     <table class="table">
         <tbody>
@@ -26,9 +38,34 @@
         </tbody>
     </table>
 
-    <a href="{{ path('secretaire_index') }}">back to list</a>
 
-    <a href="{{ path('secretaire_edit', {'id': user.id}) }}">edit</a>
 
-    {{ include('secretaire/_delete_form.html.twig') }}
+
+
+
+    <div class="row">
+
+
+
+
+
+        <div class="col-md-4">
+             <a href="{{ path('secretaire_index') }}">back to list</a>
+
+        </div>
+        <div class="col-md-4">
+                <a href="{{ path('secretaire_edit', {'id': user.id}) }}">edit</a>
+        </div>
+        <div class="col-md-4">
+               {{ include('secretaire/_delete_form.html.twig') }}
+        </div>
+    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
 {% endblock %}

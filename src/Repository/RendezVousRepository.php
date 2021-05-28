@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\RendezVous;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -35,7 +36,14 @@ class RendezVousRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    /*public function getPatientOfDoctor(User $medecin){
+        return $this->createQueryBuilder('r')
+                ->select('r.patient')
+                ->where('r.medicin = :med')
+                ->setParameter('med', $medecin)
+                ->getQuery()
+                ->getResult();
+    }*/
     /*
     public function findOneBySomeField($value): ?RendezVous
     {

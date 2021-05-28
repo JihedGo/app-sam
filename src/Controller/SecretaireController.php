@@ -20,13 +20,13 @@ class SecretaireController extends AbstractController
 
     private $encoder;
     public function __construct(UserPasswordEncoderInterface $encoder)
-    {   
+    {
         $this->encoder = $encoder;
     }
     /**
      * @Route("/", name="secretaire_index", methods={"GET"})
      */
-    
+
     public function secretaires(UserRepository $userRepository): Response
     {
         return $this->render('secretaire/index.html.twig', [
@@ -45,8 +45,10 @@ class SecretaireController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRole('ROLE_SECRETAIRE');
-            $hash = $this->encoder->encodePassword($user, "secret#123");
+            $hash = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setPassword($hash);
+            $current = $this->getUser();
+            $user->setMedecin($current);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

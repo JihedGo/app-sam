@@ -16,11 +16,11 @@
                         <div class="card-box">
                             <div class="card-block">
                                 <h6 class="card-title text-bold">Liste des Patients</h6>
-                                {% if app.user.role == "ROLE_SECRETAIRE" %}
+                                {#{% if app.user.role == "ROLE_SECRETAIRE" %}
                                 <p class="content-group">
                                   <a class="btn btn-primary" href="{{ path('patient_new') }}">Ajouter un patient</a>
                                 </p>
-                                {% endif %}
+                                {% endif %}#}
 								<div class="table-responsive">
 									  <table class="table">
                 <thead>
@@ -38,8 +38,8 @@
                         <td>{{ patient.lastName }}</td>
                         <td>{{ patient.dateNaissance ? patient.dateNaissance|date('Y-m-d') : '' }}</td>
                         <td>
-                            <a href="{{ path('patient_show', {'id': patient.id}) }}">details</a>
-                            <a href="{{ path('patient_edit', {'id': patient.id}) }}">modifier</a>
+                            <a class="btn btn-info" href="{{ path('patient_show', {'id': patient.id}) }}">details</a>
+                            <a class="btn btn-warning" href="{{ path('patient_edit', {'id': patient.id}) }}">modifier</a>
                         </td>
                     </tr>
                 {% else %}

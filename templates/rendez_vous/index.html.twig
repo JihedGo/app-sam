@@ -3,37 +3,58 @@
 {% block title %}RendezVous index{% endblock %}
 
 {% block content %}
-    <h1 class="bg-dark bg-text text-white text-center">Gestion RendezVous</h1>
 
-    <a class="btn btn-dark btn-sm" href="{{ path('rendez_vous_new') }}">Ajouter Rdv</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date RDV</th>
-                <th>Medecin</th>
-                <th>Patient</th>
-                <th>Etat</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for rendez_vou in rendez_vouses %}
-            <tr>
-                <td>{{ rendez_vou.dateAt ? rendez_vou.dateAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ rendez_vou.medicin.firstName }} {{ rendez_vou.medicin.lastName }}</td>
-                <td>{{ rendez_vou.patient.firstName }} {{ rendez_vou.patient.lastName }}</td>
-                <td>{{ rendez_vou.isTerminated ? 'terminé' : 'en cours' }}</td>
-                <td>
-                    <a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">show</a>
-                    <a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+
+      <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Gestion des RendezVous</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-block">
+                                <h6 class="">Liste des RendezVous</h6>
+
+								<div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Date RDV</th>
+                                                <th>Medecin</th>
+                                                <th>Patient</th>
+                                                <th>Etat</th>
+                                                <th>actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for rendez_vou in rendez_vouses %}
+                                            <tr>
+                                                <td>{{ rendez_vou.dateAt ? rendez_vou.dateAt|date('Y-m-d H:i:s') : '' }}</td>
+                                                <td>{{ rendez_vou.medicin.firstName }} {{ rendez_vou.medicin.lastName }}</td>
+                                                <td>{{ rendez_vou.patient.firstName }} {{ rendez_vou.patient.lastName }}</td>
+                                                <td>{{ rendez_vou.isTerminated ? 'terminé' : 'en cours' }}</td>
+                                                <td>
+                                                    <a href="{{ path('rendez_vous_show', {'id': rendez_vou.id}) }}">show</a>
+                                                    <a href="{{ path('rendez_vous_edit', {'id': rendez_vou.id}) }}">edit</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="4">no records found</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
 
 {% endblock %}

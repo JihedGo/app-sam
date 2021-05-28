@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\RendezVous;
+use App\Entity\User;
 use App\Form\RendezVousType;
 use App\Repository\RendezVousRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +21,47 @@ class RendezVousController extends AbstractController
      */
     public function index(RendezVousRepository $rendezVousRepository): Response
     {
+        $user = $this->getUser();
+        $rdves = $rendezVousRepository->findAll();
+        if($user->getRole() === "ROLE_MEDECIN"){
+            $rdves = $user->getRendezVouses();
+        }else if($user->getRole() == "ROLE_SECRETAIRE"){
+            $rdves = $rendezVousRepository->findBy(['medicin'=>$user->getMedecin()]);
+        }
         return $this->render('rendez_vous/index.html.twig', [
-            'rendez_vouses' => $rendezVousRepository->findAll(),
+            'rendez_vouses' => $rdves,
+        ]);
+    }
+
+    /**
+     * @Route("/prendre-rdv/{id}", name="prendre_rdv", methods={"GET"})
+     */
+    public function prendreRendezVous(User $medecin,RendezVousRepository $rendezVousRepository): Response
+    {
+        $rdv = new RendezVous();
+
+        $user = $this->getUser();
+        $rdv->setPatient($user);
+        $rdv->setMedicin($medecin);
+        $rdv->setDateAt(new \DateTime());
+        $rdv->setIsAccepted(false);
+        $rdv->setIsTerminated(false);
+        $rdv->setPriority(0);
+        $this->getDoctrine()->getManager()->persist($rdv);
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('info',"Votre rendez-vous a été enregistré");
+        return $this->redirectToRoute('mes_rendezvous');
+    }
+
+    /**
+     * @Route("/mes-rendezvous", name="mes_rendezvous", methods={"GET"})
+     */
+    public function mesRendezVous(RendezVousRepository $rendezVousRepository): Response
+    {
+        $user = $this->getUser();
+        $rdves = $rendezVousRepository->findBy(['patient'=>$user]);
+        return $this->render('rendez_vous/mes-rendezvous.html.twig', [
+            'rendez_vouses' => $rdves,
         ]);
     }
 

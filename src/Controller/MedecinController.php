@@ -35,6 +35,16 @@ class MedecinController extends AbstractController
             'users' => $userRepository->findAllMedecins(),
         ]);
     }
+
+    /**
+     * @Route("/medecins-list", name="medecin_list", methods={"GET"})
+     */
+    public function medecinsLists(UserRepository $userRepository): Response
+    {
+        return $this->render('medecin/liste-medecin.html.twig', [
+            'users' => $userRepository->findAllMedecins(),
+        ]);
+    }
 /**
      * @Route("/consultations/", name="doctor_consultation")
      */
@@ -76,7 +86,7 @@ class MedecinController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $this->encoder->encodePassword($user, "00000000");
+            $hash = $this->encoder->encodePassword($user, $user->getPassword());
             $user->setRole('ROLE_MEDECIN');
             $user->setPassword($hash);
             $entityManager = $this->getDoctrine()->getManager();
